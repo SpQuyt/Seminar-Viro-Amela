@@ -15,7 +15,7 @@ import {
 } from 'react-viro'
 import Objects from '../../assets/Objects'
 
-class DragThingsView extends Component {
+class DriveCarView extends Component {
     constructor(props) {
         super(props)
     }
@@ -26,24 +26,13 @@ class DragThingsView extends Component {
                 <ViroAmbientLight color={"#aaaaaa"} />
                 <ViroSpotLight innerAngle={5} outerAngle={90} direction={[0, -1, -.2]} position={[0, 3, 0]} color="#ffffff" castsShadow={true} />
                 <ViroARPlaneSelector>
-                    <ViroNode position={[0, 0, 0]} onDrag={() => { }}>
-                        {/* <Viro3DObject
-                        source={require('../../assets/objects/cube/cube.obj')}
-                        resources={[require('../../assets/objects/cube/cube.mtl')]}
-                        position={[0, 0, 0]}
-                        scale={[.1, .1, .1]}
-                        type="OBJ"
-                        animation={{ name: 'animateImage', run: true }}
-                        dragType="FixedDistance" onDrag={() => { }}
-                    /> */}
+                    <ViroNode position={[0, 0, 0]} onDrag={() => { }} >
                         <Viro3DObject
-                            source={Objects.emojiSmile}
-                            resources={[require('../../assets/objects/emoji_smile/emoji_smile_normal.png'),
-                            require('../../assets/objects/emoji_smile/emoji_smile_diffuse.png'),
-                            require('../../assets/objects/emoji_smile/emoji_smile_specular.png')]}
+                            source={require('../../assets/objects/car/car.obj')}
+                            resources={[require('../../assets/objects/car/car.mtl')]}
                             position={[0, 0, 0]}
-                            scale={[.2, .2, .2]}
-                            type="VRX"
+                            scale={[.04, .04, .04]}
+                            type="OBJ"
                         />
                     </ViroNode>
                 </ViroARPlaneSelector>
@@ -59,6 +48,6 @@ class DragThingsView extends Component {
 //     },
 // });
 
-export default DragThingsView
+export default DriveCarView
 
 const styles = StyleSheet.create({})
