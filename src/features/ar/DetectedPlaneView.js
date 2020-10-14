@@ -1,59 +1,49 @@
 'use-strict'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import {
-    ViroARPlane, ViroARPlaneSelector, ViroARScene, ViroARSceneNavigator, ViroBox, ViroConstants, ViroText,
-    Viro3DObject,
-    ViroAmbientLight,
-    ViroSpotLight,
-    ViroPortal,
-    ViroAnimatedComponent,
-    ViroAnimations,
-    ViroNode,
+    ViroARPlaneSelector, ViroARScene, ViroARSceneNavigator, ViroText,
 } from 'react-viro'
-import Objects from '../../assets/Objects'
 
-const DetectedPlaneView = () => {
-    const [text, setText] = useState('Initializing AR...');
-    const sceneNavigatorRef = useRef(null)
+class DetectedPlaneView extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            text: '',
+        }
+    }
 
-    const _onInitialized = useCallback(
-        (state) => {
-            if (state == ViroConstants.TRACKING_NORMAL) {
-                setText("Hello World!");
-            } else if (state == ViroConstants.TRACKING_NONE) {
-                // Handle loss of tracking
-            }
-        },
-        [text],
-    )
+    renderInitialScene = () => {
+        return (
+            <ViroARScene >
+                <ViroARPlaneSelector onPlaneSelected={(evt) => {
+                    console.log(evt)
+                    console.log((evt.width * evt.height).toFixed(2))
+                    this.setState({
+                        text: `Diện tích: ${(evt.width * evt.height).toFixed(2)}`
+                    })
+                }}>
+                    <ViroText text={this.state.text} style={styles.txtHanging}
+                        scale={[.2, .2, .2]} position={[0, 0, 0]} />
+                </ViroARPlaneSelector>
+            </ViroARScene>
+        )
+    }
 
-    const InitialARScene = () => (
-        <ViroARScene onTrackingUpdated={(state) => _onInitialized(state)} >
-            <ViroARPlaneSelector onPlaneSelected={(evt) => console.log(evt)} />
-        </ViroARScene>
-    )
-
-    return (
-        <ViroARSceneNavigator
-            ref={sceneNavigatorRef}
-            initialScene={{ scene: InitialARScene }} />
-    )
+    render() {
+        return (
+            <ViroARSceneNavigator
+                initialScene={{ scene: this.renderInitialScene }} />
+        )
+    }
 }
-
-ViroAnimations.registerAnimations({
-    animateImage: {
-        properties: { scaleX: 1, scaleY: .6, scaleZ: 1, opacity: 1 },
-        easing: "Bounce", duration: 5000
-    },
-});
 
 export default DetectedPlaneView
 
 const styles = StyleSheet.create({
     txtHanging: {
         fontFamily: 'Arial',
-        fontSize: 30,
+        fontSize: 15,
         color: '#ffffff',
         textAlignVertical: 'center',
         textAlign: 'center',
