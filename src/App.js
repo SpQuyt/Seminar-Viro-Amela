@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, TouchableHighlight, BackHandler } from 'react-native'
-import DetectedPlaneView from './features/ar/DetectedPlaneView'
+import DetectedPlaneView from './features/ar/measure/DetectedPlaneView'
 import DragThingsView from './features/ar/DragThingsView'
 import Photo360View from './features/vr/Photo360View'
 import {
@@ -14,7 +14,8 @@ import {
     ViroNode,
     ViroVRSceneNavigator,
 } from 'react-viro'
-import DriveCarView from './features/ar/DriveCarView'
+import DriveCarView from './features/ar/drive/DriveCarView'
+import CardIdentityView from './features/ar/card/CardIdentityView'
 
 const Type = {
     AR_TYPE: 1,
@@ -25,6 +26,7 @@ const ARType = {
     DETECTED_PLANES: 1,
     DRAG_THINGS: 2,
     DRIVE_CAR: 3,
+    CARD_ID: 4,
 }
 
 const VRType = {
@@ -61,13 +63,15 @@ class App extends Component {
     renderAR = (DetailedType) => {
         switch (DetailedType) {
             case ARType.DETECTED_PLANES:
-                return DetectedPlaneView
+                return <DetectedPlaneView />
             case ARType.DRAG_THINGS:
-                return DragThingsView
+                return <DragThingsView />
             case ARType.DRIVE_CAR:
-                return DriveCarView
+                return <DriveCarView />
+            case ARType.CARD_ID:
+                return <CardIdentityView />
             default:
-                return DetectedPlaneView
+                return <DetectedPlaneView />
         }
     }
 
@@ -81,9 +85,9 @@ class App extends Component {
     }
 
     renderScreen = (ScreenType, DetailedType) => {
-        if (ScreenType === Type.AR_TYPE)
-            return <ViroARSceneNavigator
-                initialScene={{ scene: this.renderAR(DetailedType) }} />
+        if (ScreenType === Type.AR_TYPE) {
+            return this.renderAR(DetailedType)
+        }
         return this.renderVR(DetailedType)
     }
 
@@ -108,9 +112,12 @@ class App extends Component {
                 <TouchableHighlight style={styles.contBtn} onPress={() => this.handlePress(Type.AR_TYPE, ARType.DRIVE_CAR)} >
                     <Text>Go To Drive Car View</Text>
                 </TouchableHighlight>
+                <TouchableHighlight style={styles.contBtn} onPress={() => this.handlePress(Type.AR_TYPE, ARType.CARD_ID)} >
+                    <Text>Go To Card Identity View</Text>
+                </TouchableHighlight>
 
                 <Text style={styles.txtTitle}>VR MENU</Text>
-                <TouchableHighlight style={styles.contBtn} onPress={() => navigate(ROUTES_NAME.VR.PHOTO360)} >
+                <TouchableHighlight style={styles.contBtn} onPress={() => this.handlePress(Type.VR_TYPE, VRType.PHOTO360)} >
                     <Text>Go To Photo360 View</Text>
                 </TouchableHighlight>
             </View>

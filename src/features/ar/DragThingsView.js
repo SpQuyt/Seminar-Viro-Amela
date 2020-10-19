@@ -20,7 +20,7 @@ class DragThingsView extends Component {
         super(props)
     }
 
-    render() {
+    renderInitialScene = () => {
         return (
             <ViroARScene>
                 <ViroAmbientLight color={"#aaaaaa"} />
@@ -49,6 +49,14 @@ class DragThingsView extends Component {
                 </ViroARPlaneSelector>
             </ViroARScene>
         )
+    }
+
+    render() {
+        return (
+            <ViroARSceneNavigator
+                initialScene={{ scene: this.renderInitialScene }} />
+        )
+        
     }
 }
 
