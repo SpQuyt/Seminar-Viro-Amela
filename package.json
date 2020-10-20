@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "build": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/build/generated/assets/react/release/index.android.bundle --assets-dest android/app/src/main/res/ && rm -rf ./android/app/src/main/res/drawable-mdpi/ && rm -rf ./android/app/src/main/res/raw/",
+    "release": "yarn build && cd ./android && ./gradlew bundleRelease"
   },
   "dependencies": {
     "react": "16.8.3",
