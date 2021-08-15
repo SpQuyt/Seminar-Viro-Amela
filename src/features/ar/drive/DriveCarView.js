@@ -54,7 +54,7 @@ class DriveCarView extends Component {
                     <ViroNode position={[0, 0, 0]} onDrag={() => { }} >
                         <Viro3DObject
                             source={require('../../../assets/objects/car/car.obj')}
-                            resources={[require('../../../assets/objects/car/car.mtl')]}
+                            resources={[require('../../../assets/objects/car/car_mtl.mtl')]}
                             position={[0, 0, 0]}
                             scale={[.04, .04, .04]}
                             type="OBJ"

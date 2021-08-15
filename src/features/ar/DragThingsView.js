@@ -29,7 +29,7 @@ class DragThingsView extends Component {
                     <ViroNode position={[0, 0, 0]} onDrag={() => { }}>
                         {/* <Viro3DObject
                         source={require('../../assets/objects/cube/cube.obj')}
-                        resources={[require('../../assets/objects/cube/cube.mtl')]}
+                        resources={[require('../../assets/objects/cube/cube_mtl.mtl')]}
                         position={[0, 0, 0]}
                         scale={[.1, .1, .1]}
                         type="OBJ"

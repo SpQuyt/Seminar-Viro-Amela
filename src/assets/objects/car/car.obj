@@ -1,6 +1,6 @@
 # Blender v2.90.1 OBJ File: ''
 # www.blender.org
-mtllib car.mtl
+mtllib car_mtl.mtl
 o Porsche_911_GT2
 v -0.903629 -0.414649 0.736792
 v -0.900899 -0.381690 0.716649
